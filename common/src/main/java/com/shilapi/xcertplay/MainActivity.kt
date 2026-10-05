@@ -1,31 +1,50 @@
 package com.shilapi.xcertplay
 
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var webView: WebView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(32, 32, 32, 32)
+        webView = WebView(this)
+        setContentView(webView)
+
+        val settings: WebSettings = webView.settings
+        settings.javaScriptEnabled = true
+        settings.domStorageEnabled = true
+        settings.databaseEnabled = true
+        settings.allowFileAccess = true
+        settings.allowContentAccess = true
+        settings.setSupportZoom(true)
+        settings.builtInZoomControls = true
+        settings.cacheMode = WebSettings.LOAD_DEFAULT
+
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                if (url != null) {
+                    view?.loadUrl(url)
+                    return true
+                }
+                return false
+            }
         }
 
-        val title = TextView(this).apply {
-            text = "DiPlay legacy compatibility build"
-            textSize = 26f
-            setPadding(0, 0, 0, 24)
-        }
-        val body = TextView(this).apply {
-            text = "This build keeps the app compatible with Android 4.3 (API 18) by disabling modern Compose and using classic Android views."
-            textSize = 16f
-        }
+        webView.webChromeClient = WebChromeClient()
+        webView.loadUrl("https://shihabal3amri.github.io/DiPlay/zh-Hans/")
+    }
 
-        root.addView(title)
-        root.addView(body)
-        setContentView(root)
+    override fun onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
