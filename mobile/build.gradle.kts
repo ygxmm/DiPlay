@@ -15,8 +15,11 @@ android {
 
     defaultConfig {
         applicationId = "com.shihab.diplay"
-        minSdk = 28
-        targetSdk = 37
+        // First compatibility pass for Android 4.3 (API 18).
+        // This keeps the project installable on legacy head units while preserving the modern
+        // compile toolchain for incremental migration.
+        minSdk = 18
+        targetSdk = 18
         versionCode = 30
         versionName = "0.2.11"
 
@@ -50,8 +53,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
         compose = true

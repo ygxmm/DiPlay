@@ -10,12 +10,13 @@ android {
     }
 
     defaultConfig {
-        minSdk = 28
+        // First compatibility pass for Android 4.3 (API 18).
+        minSdk = 18
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     buildFeatures {
@@ -43,4 +44,5 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation("org.robolectric:robolectric:4.17")
     testImplementation("org.mockito:mockito-core:5.20.0")
+    testImplementation(libs.jmdns)
 }

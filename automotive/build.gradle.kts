@@ -11,8 +11,9 @@ android {
 
     defaultConfig {
         applicationId = "com.shilapi.xcertplay"
-        minSdk = 28
-        targetSdk = 37
+        // First compatibility pass for Android 4.3 (API 18).
+        minSdk = 18
+        targetSdk = 18
         versionCode = 1201
         versionName = "1.2.1"
 
@@ -39,8 +40,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
         compose = true
